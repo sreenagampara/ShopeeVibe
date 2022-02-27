@@ -11,3 +11,6 @@ def home(request):
 
 def creat(request):
     return render(request, 'creat-new.html')
+
+def homepage(request):
+    return render(request, 'home page.html')
