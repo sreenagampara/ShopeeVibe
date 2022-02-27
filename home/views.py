@@ -14,3 +14,7 @@ def creat(request):
 
 def homepage(request):
     return render(request, 'home page.html')
+
+
+def orderform(request):
+     return render(request, 'oder form.html')
