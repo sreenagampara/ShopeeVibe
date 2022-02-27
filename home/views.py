@@ -18,3 +18,6 @@ def homepage(request):
 
 def orderform(request):
      return render(request, 'oder form.html')
+
+def orderplaced(request):
+    return render(request, 'oredr placed.html')
