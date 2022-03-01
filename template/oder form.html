@@ -142,7 +142,7 @@ button:hover{
 
     </style>
 </head>
-<body>
+<body>{% csrf_token %}
 <div class="container">
   <div class="title">
     <a href="home-page"> <img  src="https://i.ibb.co/C5CgQyk/shopeevibe-logo.jpg" /></a>
@@ -455,7 +455,7 @@ button:hover{
         <th colspan="2">Your order</th>
       </tr>
       <tr>
-        <td>Product Name x 2(Qty)</td>
+        <td>{{products.name}}</td>
         <td>$88.00</td>
       </tr>
       <tr>
@@ -467,22 +467,11 @@ button:hover{
         <td>Free shipping</td>
       </tr>
     </table><br>
-     <!--<div>
-     <input type="radio" name="dbt" value="dbt" checked> Direct Bank Transfer
-    </div>
-    <p>
-        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-    </p>-->
      <div>
       <input type="radio" name="dbt" value="cd"> Cash on Delivery
     </div>
-     <!--<div>
-      <input type="radio" name="dbt" value="cd"> Paypal <span>
-      <img src="https://www.logolynx.com/images/logolynx/c3/c36093ca9fb6c250f74d319550acac4d.jpeg" alt="" width="50">
-      </span>
-    </div>-->
     <a href="order-placed" ><button type="button">Place Order</button></a>
-  </div><!-- Yorder -->
+  </div>
  </div>
 </div>
 </body>

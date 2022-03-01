@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home Page</title>
 <style>
-     ul {
+body {
+background-color:#dcdedc;
+}
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -39,6 +42,29 @@ a:hover{
 .active {
   background-color: #04AA6D;
 }
+.card img{
+width:200px;
+height:200px;
+padding:10px 13px;
+}
+.card {
+  display: inline-block;
+  padding: 10px 15px;
+  vertical-align: middle;
+}
+h5{
+color:solid black;
+font-size:20px;
+text-align:center;
+}
+p{
+font-size:20px;
+}
+.card:hover {
+background-color:white
+
+}
+
 </style>
 </head>
 <body>
@@ -47,8 +73,19 @@ a:hover{
   <li><a href="home-page">Home</a></li>
   <!--<li><a href="home">Login</a></li>-->
   <li><a href="#contact">Contact</a></li>
-  <li style="float:right"><a class="active" href="#about">About</a></li>
+  <li style="float:right" ><a class="active" href="#about">About</a></li>
 </ul>
-hello world
+<form action="order-form" method="POST">{% csrf_token %}
+{% for product in products %}
+<div class="card" style="width: 18rem;">
+  <img src="{{product.image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title" >{{product.name}}</h5>
+    <p class="card-text">₹{{product.price}}</p>
+    <button type="submit" style="width:100px;height:30px; background-color:green">Buy Now</button>
+  </div>
+</div>
+  {% endfor %}
+  </form>
 </body>
 </html>

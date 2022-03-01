@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .form import contactform
-from .models import register
+from .models import register, product
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 
@@ -9,16 +9,20 @@ from django.contrib.auth.models import User, auth
 # Create your views here.
 
 def home(request):
+    x = "User Name Or Password Is Invalid"
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username = request.POST.get('user')
         password = request.POST.get('password')
+        # print(username)
+        # print(password)
         user = auth.authenticate(username=username, password=password)
+        # print(user)
         if user is not None:
             auth.login(request, user)
             return redirect('/home-page')
         else:
             messages.info(request, "Invalid User Name Or Password")
-            return redirect('/home')
+        return render(request, 'login.html', {'message': x})
     else:
         return render(request, 'login.html')
 
@@ -29,7 +33,7 @@ def creat(request):
         password = request.POST.get('password')
         email = request.POST.get('email')
         # print(username)
-        register.objects.create(username=username, password=password, email=email)
+        user = User.objects.create_user(username=username, password=password, email=email)
         print('user created')
         return redirect('/home')
     else:
@@ -38,11 +42,14 @@ def creat(request):
 
 
 def homepage(request):
-    return render(request, 'home page.html')
+    products = product.objects.all()
+    return render(request, 'home page.html', {'products': products})
 
 
 def orderform(request):
-    return render(request, 'oder form.html')
+    if request.method == 'POST':
+
+    return render(request, 'oder form.html',)
 
 
 def orderplaced(request):
