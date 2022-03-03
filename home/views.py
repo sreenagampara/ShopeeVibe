@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .form import contactform
-from .models import register, product
+from .models import register, product, cart
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 
@@ -48,6 +48,9 @@ def homepage(request):
 
 def orderform(request):
     if request.method == 'POST':
+        costumername = request.user.username
+        carts = cart.objects.create(costumername=costumername,productname='null', productprice= '0', productdetails='null')
+        print(costumername)
         return render(request, 'oder form.html')
 
 
@@ -55,9 +58,3 @@ def orderplaced(request):
     return render(request, 'oredr placed.html')
 
 
-def cart(request):
-    if request.method == 'POST':
-        costumername = request.user
-        print(costumername.id)
-    else:
-        return render(request, 'oder form.html')
