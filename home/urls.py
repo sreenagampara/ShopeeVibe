@@ -8,4 +8,5 @@ urlpatterns = [
     path('home-page', views.homepage, name='home page.html'),
     path('order-form',views.orderform, name='oder form.html'),
     path('order-placed', views.orderplaced, name='oredr placed.html'),
+    path('cart', views.cart, name='oder form.html')
 ]

@@ -48,9 +48,16 @@ def homepage(request):
 
 def orderform(request):
     if request.method == 'POST':
-
-    return render(request, 'oder form.html',)
+        return render(request, 'oder form.html')
 
 
 def orderplaced(request):
     return render(request, 'oredr placed.html')
+
+
+def cart(request):
+    if request.method == 'POST':
+        costumername = request.user
+        print(costumername.id)
+    else:
+        return render(request, 'oder form.html')
