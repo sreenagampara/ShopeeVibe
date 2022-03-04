@@ -20,7 +20,7 @@ class product(models.Model):
 class cart(models.Model):
     costumername = models.CharField(max_length=50)
     productname = models.CharField(max_length=50)
-    productprice = models.IntegerField()
+    productprice = models.FloatField()
     productdetails = models.CharField(max_length=1000)
     objects = models.Manager()
 

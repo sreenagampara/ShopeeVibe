@@ -64,7 +64,9 @@ font-size:20px;
 background-color:white
 
 }
-
+.form {
+display : table-row;
+}
 </style>
 </head>
 <body>
@@ -75,18 +77,23 @@ background-color:white
   <li><a href="#contact">Contact</a></li>
   <li style="float:right" ><a class="active" href="#about">About</a></li>
 </ul>
-<form action="order-form" method="POST">{% csrf_token %}
 {% for product in products %}
 <div class="card" style="width: 18rem;">
-  <img src="{{product.image}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title" >{{product.name}}</h5>
-    <p class="card-detail" >{{product.detail}}</p>
-    <p class="card-text">₹{{product.price}}</p>
-    <button type="submit" style="width:100px;height:30px; background-color:green">Buy Now</button>
+<form action="order-form" method="POST">{% csrf_token %}
+
+          <img src="{{product.image}}" class="card-img-top" alt="...">
+          <div class="card-body">
+              <h5 class="card-title" >{{product.name}}</h5>
+              <p class="card-detail" >{{product.detail}}</p>
+              <p class="card-text">₹{{product.price}}</p>
+              <button type="submit" style="width:100px;height:30px; background-color:green">Buy Now</button>
+              <input type="hidden" name="name" value="{{product.name}}">
+              <input type="hidden" name="detail" value="{{product.detail}}">
+               <input type="hidden" name="price" value="{{product.price}}">
+          </div>
+
+</form>
   </div>
-</div>
-  {% endfor %}
-  </form>
+{% endfor %}
 </body>
 </html>

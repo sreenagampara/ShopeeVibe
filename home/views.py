@@ -48,13 +48,24 @@ def homepage(request):
 
 def orderform(request):
     if request.method == 'POST':
-        costumername = request.user.username
-        carts = cart.objects.create(costumername=costumername,productname='null', productprice= '0', productdetails='null')
-        print(costumername)
-        return render(request, 'oder form.html')
+        name = request.user.username
+        if cart.objects.filter(costumername=name).exists():
+            name = request.POST.get('name')
+            detail = request.POST.get('detail')
+            price = request.POST.get('price')
+            print(name)
+            print(detail)
+            print(price)
+            cart.objects.filter(pk=3).update(productprice=price)
+            cart.save()
+            return render(request, 'oder form.html')
+        else:
+            cart.objects.create(costumername=name, productname='null', productprice='0', productdetails='null')
+            print(name, 'not exists')
+            return render(request, 'oder form.html')
+    else:
+        return render(request, 'home page.html')
 
 
 def orderplaced(request):
     return render(request, 'oredr placed.html')
-
-
