@@ -57,7 +57,7 @@ def orderform(request):
             print(detail)
             print(price)
             cart.objects.filter(pk=3).update(productprice=price)
-            cart.save()
+            
             return render(request, 'oder form.html')
         else:
             cart.objects.create(costumername=name, productname='null', productprice='0', productdetails='null')
