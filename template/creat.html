@@ -160,7 +160,7 @@ body{
 		</div>
 		<br>
   <form action="home" METHOD="POST">
-		<div class="login">
+		<div class="login">{% csrf_tocken %}
 				<input type="text" placeholder="username" name="user"><br>
 				<input type="password" placeholder="password" name="password"><br>
 				<input type="button" placeholder="Login" name="Login"> <br><br>

@@ -42,7 +42,8 @@ a:hover{
 .active {
   background-color: #04AA6D;
 }
-.card img{
+input[type=image]
+{
 width:200px;
 height:200px;
 padding:10px 13px;
@@ -67,21 +68,40 @@ background-color:white
 .form {
 display : table-row;
 }
+.head button
+{
+ background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 14px 16px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  margin: 2px 4px;
+  cursor: pointer;
+  font-size:14px;
+ }
+ form button:hover
+ {
+ background-color:#777d7a;
+ }
 </style>
 </head>
 <body>
-<ul>
-  <li><img  src="https://i.ibb.co/C5CgQyk/shopeevibe-logo.jpg"/></li>
-  <li><a href="home-page">Home</a></li>
-  <!--<li><a href="home">Login</a></li>-->
-  <li><a href="#contact">Contact</a></li>
-  <li style="float:right" ><a class="active" href="#about">About</a></li>
+<ul class="head" >
+      <li><img  src="https://i.ibb.co/C5CgQyk/shopeevibe-logo.jpg"/></li>
+      <li><a href="home-page">Home</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li style="float:right" ><a class="active" href="#about">About</a></li>
+    <form action="logouting" method="POST"> {% csrf_token %}
+      <button type="submit">Logout </button>
+    </form>
 </ul>
 {% for product in products %}
 <div class="card" style="width: 18rem;">
 <form action="order-form" method="POST">{% csrf_token %}
 
-          <img src="{{product.image}}" class="card-img-top" alt="...">
+          <input type="image" src="{{product.image}}" alt="Image of Product">
           <div class="card-body">
               <h5 class="card-title" >{{product.name}}</h5>
               <p class="card-detail" >{{product.detail}}</p>
@@ -90,6 +110,7 @@ display : table-row;
               <input type="hidden" name="name" value="{{product.name}}">
               <input type="hidden" name="detail" value="{{product.detail}}">
                <input type="hidden" name="price" value="{{product.price}}">
+              <input type="hidden" name="image" value="{{product.image}}">
           </div>
 
 </form>

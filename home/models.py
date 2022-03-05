@@ -22,6 +22,7 @@ class cart(models.Model):
     productname = models.CharField(max_length=50)
     productprice = models.FloatField()
     productdetails = models.CharField(max_length=1000)
+    productimage = models.CharField(max_length=5000, default='some string')
     objects = models.Manager()
 
 
