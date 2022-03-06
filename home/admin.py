@@ -22,4 +22,4 @@ class order_listadmin(admin.ModelAdmin):
 admin.site.register(register, registeradmin)
 admin.site.register(product, productadmin)
 admin.site.register(cart, cartadmin)
-admin.site, register(order_list, order_listadmin)
+admin.site.register(order_list, order_listadmin)
