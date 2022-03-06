@@ -4,13 +4,13 @@ from .form import contactform
 from .models import register, product, cart
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import cache_control
 
 
 # from django.contrib.auth import logout
 
 # Create your views here.
-@never_cache
+
 def home(request):
     x = "User Name Or Password Is Invalid"
     if request.method == 'POST':
@@ -27,7 +27,7 @@ def home(request):
             messages.info(request, "Invalid User Name Or Password")
         return render(request, 'login.html', {'message': x})
     else:
-        return render(request, 'login.html')
+        return HttpResponse(render(request, 'login.html'))
 
 
 def creat(request):
@@ -46,9 +46,13 @@ def creat(request):
         return render(request, 'creat-new.html')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def homepage(request):
-    products = product.objects.all()
-    return render(request, 'home page.html', {'products': products})
+    if request.user.is_authenticated:
+        products = product.objects.all()
+        return render(request, 'home page.html', {'products': products})
+    else:
+        return redirect('/home')
 
 
 def orderform(request):
@@ -77,21 +81,24 @@ def orderform(request):
         return render(request, 'home page.html')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def shipping(request):
-    names = request.user.username
-    name = request.POST.get('fname')
-    print(names)
-    print(name)
-    return render(request, 'oredr placed.html', {'name': names})
+    if request.user.is_authenticated:
+        names = request.user.username
+        return render(request, 'oredr placed.html', {'name': names})
+    else:
+        return redirect('/order-placed')
 
 
 def orderplaced(request):
-    return render(request, 'oredr placed.html')
+    return redirect('/order-placed')
 
 
-@never_cache
-def logouting(requset, back_page=None):
+def logouting(requset):
     if requset.method == 'POST':
         auth.logout(requset)
-        return HttpResponseRedirect("/home")
-    return render(requset, 'home page.html')
+        return redirect("/home")
+    else:
+        return redirect("/home")
+
+
