@@ -75,7 +75,6 @@ def orderform(request):
             return render(request, 'oder form.html', {'t': t})
         else:
             cart.objects.create(costumername=name, productname=product_name, productprice=price, productdetails=detail)
-            print(name, 'not exists')
             return render(request, 'oder form.html', {'details': t})
     else:
         return render(request, 'home page.html')
@@ -84,8 +83,26 @@ def orderform(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def shipping(request):
     if request.user.is_authenticated:
-        names = request.user.username
-        return render(request, 'oredr placed.html', {'name': names})
+        if request.method == 'POST':
+            names = request.user.username
+            fname = request.POST.get('fname')
+            lname = request.POST.get('lname')
+            cname = request.POST.get('cname')
+            contry = request.POST.get('selection')
+            street = request.POST.get('street')
+            apartment = request.POST.get('apartment')
+            city = request.POST.get('city')
+            state = request.POST.get('state')
+            postcode = request.POST.get('postcode')
+            phone = request.POST.get('phone')
+            email = request.POST.get('email')
+            productname = request.POST.get('productname')
+            productdetails = request.POST.get('productdetails')
+            productimage = request.POST.get('productimage')
+            shipp = request.POST.get('shipp')
+
+            print(contry)
+            return render(request, 'oredr placed.html', {'name': names})
     else:
         return redirect('/order-placed')
 
