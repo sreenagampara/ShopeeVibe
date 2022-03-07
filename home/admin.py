@@ -15,7 +15,7 @@ class cartadmin(admin.ModelAdmin):
 
 
 class order_listadmin(admin.ModelAdmin):
-    list_display = ('name', 'productname', 'shipping_methode')
+    list_display = ('name', 'productname', 'productdetails', 'shipping_methode')
 
 
 # Register your models here.

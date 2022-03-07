@@ -484,14 +484,14 @@
               </table><br>
               <div class="image">
                 <img  src="{{item.productimage}}" alt="shopeevibe-logo" />
-              {% endfor %}
-                <input type="radio" name="shipp" value="Cash on Delivery" required> Cash on Delivery
-              </div>
-                <button type="submit">Place Order</button>{% csrf_token %}
                 <input type="hidden" name="productname" value="{{item.productname}}">
                 <input type="hidden" name="productprice" value="{{item.productprice}}">
                 <input type="hidden" name="productdetails" value="{{item.productdetails}}">
                 <input type="hidden" name="productimage" value="{{item.productimage}}">
+              {% endfor %}
+                <input type="radio" name="shipp" value="Cash on Delivery" required> Cash on Delivery
+              </div>
+                <button type="submit">Place Order</button>{% csrf_token %}
             </div>
           </form>
         </div>

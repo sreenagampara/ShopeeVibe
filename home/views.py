@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .form import contactform
-from .models import register, product, cart
+from .models import register, product, cart, order_list
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.views.decorators.cache import cache_control
@@ -99,9 +99,12 @@ def shipping(request):
             productname = request.POST.get('productname')
             productdetails = request.POST.get('productdetails')
             productimage = request.POST.get('productimage')
+            productprice = request.POST.get('productprice')
             shipp = request.POST.get('shipp')
-
-            print(contry)
+            order_list.objects.create(name=names, fname=fname, lname=lname, cname=cname, contry=contry, street=street,
+                                      apartment=apartment, city=city, state=state, postcode=postcode, phone=phone,
+                                      email=email, productname=productname, productdetails=productdetails,
+                                      productprice=productprice, productimage=productimage, shipping_methode=shipp)
             return render(request, 'oredr placed.html', {'name': names})
     else:
         return redirect('/order-placed')
