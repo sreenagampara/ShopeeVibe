@@ -85,6 +85,17 @@ display : table-row;
  {
  background-color:#777d7a;
  }
+ details > summary
+ {
+  cursor: pointer;
+  list-style-type: '...';
+}
+
+details
+{
+  margin: 0;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -104,7 +115,13 @@ display : table-row;
           <input type="image" src="{{product.image}}" alt="Image of Product">
           <div class="card-body">
               <h5 class="card-title" >{{product.name}}</h5>
-              <p class="card-detail" >{{product.detail}}</p>
+              <details class="card-details">
+                  <summary>
+                     {{product.detail|slice:"0:20"}}
+                  </summary>
+                     {{product.detail|slice:"20:1000"}}
+              </details>
+             <!-- <p class="card-detail" >{{product.detail}}</p> -->
               <p class="card-text">₹{{product.price}}</p>
               <button type="submit" style="width:100px;height:30px; background-color:green">Buy Now</button>
               <input type="hidden" name="name" value="{{product.name}}">
