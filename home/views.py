@@ -110,6 +110,12 @@ def shipping(request):
         return redirect('/order-placed')
 
 
+def cartpage(request):
+    name = request.user.username
+    t = cart.objects.filter(costumername=name)
+    return render(request, 'cart page.html', {'products': t})
+
+
 def orderplaced(request):
     return redirect('/order-placed')
 
@@ -120,5 +126,3 @@ def logouting(requset):
         return redirect("/home")
     else:
         return redirect("/home")
-
-
