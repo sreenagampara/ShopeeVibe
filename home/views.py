@@ -111,9 +111,29 @@ def shipping(request):
 
 
 def cartpage(request):
-    name = request.user.username
-    t = cart.objects.filter(costumername=name)
-    return render(request, 'cart page.html', {'products': t})
+    if request.method == 'POST':
+        name = request.user.username
+        detail = request.POST.get('detail')
+        price = request.POST.get('price')
+        product_name = request.POST.get('name')
+        image = request.POST.get('image')
+        t = cart.objects.filter(costumername=name)
+        if cart.objects.filter(costumername=name).exists():
+
+            for item in t:
+                item.productname = product_name
+                item.productprice = price
+                item.productdetails = detail
+                item.productimage = image
+                item.save()
+
+            return render(request, 'cart page.html', {'products': t})
+        else:
+            cart.objects.create(costumername=name, productname=product_name, productprice=price, productdetails=detail)
+            return render(request, 'cart page.html', {'products': t})
+    else:
+        return render(request, 'home page.html')
+
 
 
 def orderplaced(request):

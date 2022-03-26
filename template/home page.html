@@ -110,7 +110,7 @@ details
 </ul>
 {% for product in products %}
 <div class="card" style="width: 18rem;">
-<form action="cart" method="POST">{% csrf_token %}
+<form action="order-form" method="POST">{% csrf_token %}
 
           <input type="image" src="{{product.image}}" alt="Image of Product">
           <div class="card-body">
@@ -123,7 +123,7 @@ details
               </details>
              <!-- <p class="card-detail" >{{product.detail}}</p> -->
               <p class="card-text">₹{{product.price}}</p>
-              <button type="submit" style="width:100px;height:30px; background-color:green">Add To Cart</button>
+              <button type="submit" style="width:100px;height:30px; background-color:green">Buy Now</button>
               <input type="hidden" name="name" value="{{product.name}}">
               <input type="hidden" name="detail" value="{{product.detail}}">
                <input type="hidden" name="price" value="{{product.price}}">
@@ -131,6 +131,15 @@ details
           </div>
 
 </form>
+    <form action="cart" method="POST" >{% csrf_token %}
+      <div class="cart">
+        <input type="hidden" name="name" value="{{product.name}}">
+              <input type="hidden" name="detail" value="{{product.detail}}">
+               <input type="hidden" name="price" value="{{product.price}}">
+               <input type="hidden" name="image" value="{{product.image}}">
+        <button type="submit" style="width:100px;height:30px; background-color:green" >Add to Cart</button>
+      </div>
+    </form>
   </div>
 {% endfor %}
 </body>
