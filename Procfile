@@ -1,1 +1,1 @@
-web: gunicorn ShopeeVibe.wsgi
+web: gunicorn shopping.wsgi
